@@ -41,22 +41,22 @@
 }
 
 .dark {
-  --background: 105 54% 13%;
+  --background: 105 54% 10%;  /* Darker green background */
   --foreground: 0 0% 98%;
 
-  --card: 105 54% 13%;
+  --card: 105 54% 13%;  /* Dark green card */
   --card-foreground: 0 0% 98%;
 
   --popover: 105 54% 13%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 105 54% 44%;
+  --primary: 105 54% 40%;  /* Slightly darkened primary */
   --primary-foreground: 0 0% 98%;
 
-  --secondary: 0 0% 98%;
-  --secondary-foreground: 105 54% 13%;
+  --secondary: 105 54% 20%;  /* Darker secondary */
+  --secondary-foreground: 0 0% 98%;
 
-  --muted: 105 54% 20%;
+  --muted: 105 54% 18%;  /* Darker muted */
   --muted-foreground: 0 0% 80%;
 
   --accent: 51 80% 59%;
@@ -65,9 +65,9 @@
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 105 54% 30%;
-  --input: 105 54% 20%;
-  --ring: 105 54% 44%;
+  --border: 105 54% 25%;  /* Darker border */
+  --input: 105 54% 15%;   /* Darker input */
+  --ring: 105 54% 40%;    /* Darker ring */
 }
 
 @layer base {
@@ -75,7 +75,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans dark;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold;
@@ -92,7 +92,7 @@
   }
   .product-card {
     @apply relative overflow-hidden rounded-xl transition-all duration-300
-           bg-white shadow-md hover:shadow-xl hover:translate-y-[-5px];
+           bg-white shadow-md hover:shadow-xl hover:translate-y-[-5px] dark:bg-dark-green/90 dark:shadow-dark-green/30;
   }
   .leaf-icon-container {
     @apply absolute z-10 opacity-0 transition-all duration-300 animate-leaf-fall;
@@ -105,7 +105,7 @@
   
   /* Luxury enhancements */
   .glass-card {
-    @apply backdrop-blur-md bg-white/20 border border-white/30 shadow-xl;
+    @apply backdrop-blur-md bg-white/20 border border-white/30 shadow-xl dark:bg-dark-green/30 dark:border-dark-green/50;
   }
   
   .luxury-gradient {
@@ -126,5 +126,32 @@
   
   .animate-subtle {
     @apply transition-all duration-500 hover:scale-[1.02];
+  }
+  
+  /* New creative elements */
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-dark-green/40 border border-white/10 dark:bg-dark-green/60;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent dark:from-white dark:to-pale-gold/90;
+  }
+  
+  .forest-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23264F18' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .floating-element {
+    @apply animate-float transition-all duration-300;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+  
+  .forest-gradient {
+    @apply bg-gradient-to-br from-dark-green via-ryb-green to-dark-green/80;
+  }
+  
+  .frost-glass {
+    @apply backdrop-blur-md bg-white/10 dark:bg-dark-green/20 border border-white/20 dark:border-white/5;
   }
 }
