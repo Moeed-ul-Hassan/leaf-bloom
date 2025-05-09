@@ -37,7 +37,7 @@
   --input: 214.3 31.8% 91.4%;
   --ring: 105 54% 44%;
 
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 .dark {
@@ -92,14 +92,39 @@
   }
   .product-card {
     @apply relative overflow-hidden rounded-xl transition-all duration-300
-           bg-white shadow-md hover:shadow-xl;
+           bg-white shadow-md hover:shadow-xl hover:translate-y-[-5px];
   }
   .leaf-icon-container {
     @apply absolute z-10 opacity-0 transition-all duration-300 animate-leaf-fall;
   }
   .section-heading {
-    @apply text-3xl md:text-4xl font-display font-semibold mb-6 text-dark-green relative
+    @apply text-3xl md:text-4xl font-display font-semibold mb-6 text-dark-green dark:text-white relative
            after:absolute after:bottom-0 after:left-0 after:h-1 after:w-16 
            after:bg-gradient-to-r after:from-ryb-green after:to-dark-green;
+  }
+  
+  /* Luxury enhancements */
+  .glass-card {
+    @apply backdrop-blur-md bg-white/20 border border-white/30 shadow-xl;
+  }
+  
+  .luxury-gradient {
+    @apply bg-gradient-to-br from-ryb-green via-dark-green to-ryb-green/80;
+  }
+  
+  .modern-text {
+    @apply tracking-tight leading-tight;
+  }
+  
+  .creative-border {
+    @apply border-b-2 border-pale-gold transition-all duration-300 hover:border-ryb-green;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 hover:translate-y-[-5px] hover:shadow-xl;
+  }
+  
+  .animate-subtle {
+    @apply transition-all duration-500 hover:scale-[1.02];
   }
 }

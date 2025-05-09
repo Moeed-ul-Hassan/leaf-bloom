@@ -18,7 +18,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
-      <ProductGrid title="Trending Digital Products" />
+      <ProductGrid title="Curated Digital Masterpieces" />
       <CategorySection />
       <CreatorSpotlight />
       <TestimonialSection />
