@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Eye, ShoppingCart, Heart, Star } from 'lucide-react';
+import { Eye, ShoppingCart, Heart, Star, ShieldCheck, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -19,6 +19,7 @@ type Product = {
   };
   isBestseller?: boolean;
   isNew?: boolean;
+  isOfficial?: boolean;
 };
 
 interface ProductGridProps {
@@ -41,7 +42,8 @@ const dummyProducts: Product[] = [
       name: 'Jane Smith',
       avatar: '/placeholder.svg',
     },
-    isBestseller: true
+    isBestseller: true,
+    isOfficial: true
   },
   {
     id: '2',
@@ -66,7 +68,8 @@ const dummyProducts: Product[] = [
     creator: {
       name: 'Artistic Studios',
       avatar: '/placeholder.svg',
-    }
+    },
+    isOfficial: true
   },
   {
     id: '4',
@@ -79,7 +82,8 @@ const dummyProducts: Product[] = [
       name: 'ResumeExperts',
       avatar: '/placeholder.svg',
     },
-    isBestseller: true
+    isBestseller: true,
+    isOfficial: true
   },
   {
     id: '5',
@@ -104,7 +108,8 @@ const dummyProducts: Product[] = [
       name: 'Startup Sage',
       avatar: '/placeholder.svg',
     },
-    isNew: true
+    isNew: true,
+    isOfficial: true
   },
   {
     id: '7',
@@ -128,11 +133,12 @@ const dummyProducts: Product[] = [
     creator: {
       name: 'Money Mentors',
       avatar: '/placeholder.svg',
-    }
+    },
+    isOfficial: true
   }
 ];
 
-export default function ProductGrid({ title = "Featured Products", products = dummyProducts, layout = 'grid', className }: ProductGridProps) {
+export default function ProductGrid({ title = "Curated Digital Masterpieces", products = dummyProducts, layout = 'grid', className }: ProductGridProps) {
   const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
   const { toast } = useToast();
   
@@ -173,13 +179,24 @@ export default function ProductGrid({ title = "Featured Products", products = du
     });
   };
   
+  const handleSellingInfo = () => {
+    toast({
+      title: "Curated Marketplace",
+      description: "We don't allow third-party selling. All products are created or verified by our team.",
+      variant: "default",
+    });
+  };
+  
   const getProductCard = (product: Product, index: number) => (
     <div 
       key={product.id}
       className={cn(
         "product-card group transition-all duration-300 animate-grow-fade",
         layout === 'masonry' && index % 3 === 0 ? "md:col-span-2" : "",
-        { "border border-ryb-green": product.isBestseller }
+        {
+          "border border-ryb-green": product.isBestseller,
+          "border border-premium-gold": product.isOfficial
+        }
       )}
       style={{ 
         animationDelay: `${index * 100}ms`,
@@ -221,6 +238,12 @@ export default function ProductGrid({ title = "Featured Products", products = du
           {product.isBestseller && (
             <span className="px-2 py-1 bg-ryb-green text-white text-xs font-bold rounded">BESTSELLER</span>
           )}
+          {product.isOfficial && (
+            <div className="premium-badge flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" />
+              <span>Official</span>
+            </div>
+          )}
         </div>
         
         {/* Quick preview button */}
@@ -260,19 +283,30 @@ export default function ProductGrid({ title = "Featured Products", products = du
         </div>
         
         {/* Rating */}
-        <div className="flex items-center mt-2">
-          <div className="flex text-pale-gold">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star 
-                key={i} 
-                className="w-3 h-3" 
-                fill={i < Math.floor(product.rating) ? "currentColor" : "none"}
-              />
-            ))}
+        <div className="flex items-center justify-between mt-2">
+          <div className="flex items-center">
+            <div className="flex text-pale-gold">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star 
+                  key={i} 
+                  className="w-3 h-3" 
+                  fill={i < Math.floor(product.rating) ? "currentColor" : "none"}
+                />
+              ))}
+            </div>
+            <span className="ml-1 text-xs text-muted-foreground">
+              {product.rating.toFixed(1)}
+            </span>
           </div>
-          <span className="ml-1 text-xs text-muted-foreground">
-            {product.rating.toFixed(1)}
-          </span>
+          
+          <Button 
+            size="sm" 
+            variant="ghost" 
+            className="p-0 h-auto text-muted-foreground hover:text-foreground"
+            onClick={handleSellingInfo}
+          >
+            <Info className="w-3 h-3" />
+          </Button>
         </div>
       </div>
     </div>
@@ -282,17 +316,14 @@ export default function ProductGrid({ title = "Featured Products", products = du
     <section className={cn("py-16", className)}>
       <div className="container mx-auto px-4">
         {title && (
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-display font-semibold text-dark-green dark:text-white">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-semibold text-dark-green dark:text-white">
               {title}
             </h2>
-            <Link 
-              to="/products" 
-              className="text-ryb-green hover:text-dark-green transition-colors flex items-center text-sm font-medium"
-            >
-              View All
-              <ArrowRight className="ml-1 w-4 h-4" />
-            </Link>
+            <div className="w-20 h-1 bg-gradient-to-r from-ryb-green to-pale-gold mx-auto mt-4 rounded-full"></div>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+              Our team carefully selects and verifies every digital product to ensure premium quality.
+            </p>
           </div>
         )}
         
@@ -301,6 +332,18 @@ export default function ProductGrid({ title = "Featured Products", products = du
           layout === 'grid' ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1 md:grid-cols-3"
         )}>
           {visibleProducts.map((product, index) => getProductCard(product, index))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Button size="lg" className="bg-gradient-primary hover:bg-gradient-hover">
+            Explore More Products
+            <ArrowRight className="ml-2 w-4 h-4" />
+          </Button>
+          
+          <div className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground">
+            <ShieldCheck className="w-4 h-4 text-ryb-green" />
+            All products are created or verified by our team. No third-party selling.
+          </div>
         </div>
       </div>
     </section>

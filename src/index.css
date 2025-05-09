@@ -154,4 +154,106 @@
   .frost-glass {
     @apply backdrop-blur-md bg-white/10 dark:bg-dark-green/20 border border-white/20 dark:border-white/5;
   }
+  
+  /* Enhanced UI components */
+  .premium-badge {
+    @apply bg-gradient-gold text-dark-green px-3 py-1 rounded-full text-xs font-bold
+           shadow-premium border border-premium-gold/30;
+  }
+  
+  .shimmer-effect {
+    @apply relative overflow-hidden;
+  }
+  
+  .shimmer-effect::after {
+    @apply absolute inset-0;
+    content: '';
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite linear;
+  }
+  
+  .dark .shimmer-effect::after {
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  
+  /* Improved preloader */
+  #preloader {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-dark-green
+           transition-opacity duration-700 ease-in-out;
+  }
+  
+  #preloader.fade-out {
+    opacity: 0;
+  }
+  
+  .preloader-background {
+    @apply absolute inset-0 bg-gradient-to-br from-dark-green via-forest-dark to-dark-green;
+    background-size: 200% 200%;
+    animation: gradientShift 5s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+  }
+  
+  #preloaderContent {
+    @apply relative z-10 text-center;
+  }
+  
+  #preloaderBar {
+    @apply h-2 w-0 bg-gradient-to-r from-ryb-green to-pale-gold rounded-full
+           shadow-lg transition-all duration-300 ease-out;
+  }
+  
+  /* Fade-in animation for content */
+  .fade-in {
+    @apply opacity-0 transform translate-y-4 scale-95
+           transition-all duration-700 ease-out;
+  }
+  
+  /* Notification styles */
+  .notification {
+    @apply fixed bottom-6 right-6 z-40 max-w-md transform translate-y-20 opacity-0
+           transition-all duration-300 ease-out;
+  }
+  
+  .notification-visible {
+    @apply translate-y-0 opacity-100;
+  }
+  
+  .notification-content {
+    @apply bg-white dark:bg-dark-green rounded-lg p-4 shadow-xl
+           border border-ryb-green/20 flex gap-3 items-start;
+  }
+  
+  .notification-icon {
+    @apply text-xl;
+  }
+  
+  .notification-close {
+    @apply ml-auto text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
+           transition-colors text-xl leading-none;
+  }
+  
+  /* "No Selling" UI elements */
+  .no-selling-badge {
+    @apply absolute top-2 left-2 z-10 bg-destructive/90 text-white text-xs font-bold
+           px-2 py-1 rounded-md shadow-md;
+  }
 }

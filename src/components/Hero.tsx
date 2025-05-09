@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, Shield, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Hero() {
@@ -48,7 +48,7 @@ export default function Hero() {
             </h1>
             
             <p className="text-lg text-white/90 max-w-lg">
-              Explore our exclusive collection of premium digital products crafted by world-renowned creators – from masterclass courses to bespoke templates.
+              Explore our exclusive collection of premium digital products crafted by our world-renowned creators – from masterclass courses to bespoke templates.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
@@ -65,35 +65,50 @@ export default function Hero() {
                 variant="outline"
                 className="border-white/50 text-white hover:bg-white/10 backdrop-blur-sm"
               >
-                For Creators
+                Our Creators
               </Button>
             </div>
             
             <div className="pt-10 text-white/90 text-sm">
-              <p>Trusted by elite creators and discerning clients worldwide</p>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-pale-gold" />
+                <p>All products verified and curated by our expert team</p>
+              </div>
               <div className="flex items-center gap-4 mt-4">
                 {Array.from({ length: 4 }).map((_, i) => (
                   <div key={i} className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30"></div>
                 ))}
-                <span className="text-xs font-medium">+ many more</span>
+                <span className="text-xs font-medium">Featured creators</span>
               </div>
             </div>
           </div>
           
           <div className={`relative transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <div className="relative z-10 glass-card rounded-2xl p-6 shadow-2xl">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden mb-5 bg-gradient-primary">
+              <div className="absolute top-4 right-4 z-20">
+                <div className="premium-badge flex items-center gap-1.5">
+                  <Shield className="w-3 h-3" /> Official Product
+                </div>
+              </div>
+              
+              <div className="aspect-[4/3] rounded-xl overflow-hidden mb-5 bg-gradient-primary relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
                 <img 
                   src="/placeholder.svg" 
                   alt="Featured Product" 
                   className="w-full h-full object-cover mix-blend-overlay"
                 />
+                
+                {/* Product verification badge */}
+                <div className="absolute bottom-3 left-3 z-20 px-2 py-1 bg-white/20 backdrop-blur-sm rounded-full flex items-center gap-1.5">
+                  <ShieldCheck className="w-3 h-3 text-pale-gold" />
+                  <span className="text-xs font-semibold text-white">Verified</span>
+                </div>
               </div>
               
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-medium text-white/80 tracking-widest">FEATURED COLLECTION</span>
-                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-pale-gold/90 text-dark-green">Exclusive</span>
                 </div>
                 
                 <h3 className="text-white font-semibold text-2xl">Creative Masterclass Suite</h3>
