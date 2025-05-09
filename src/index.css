@@ -9,65 +9,11 @@
   --font-inter: 'Inter', sans-serif;
   --font-playfair: 'Playfair Display', serif;
   
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-
-  --primary: 105 54% 44%;  /* RYB Green */
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 105 54% 24%; /* Cal Poly Pomona Green */
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 51 80% 59%; /* Pale gold */
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 105 54% 44%;
-
-  --radius: 0.75rem;
+  /* ... keep existing code (color variables) */
 }
 
 .dark {
-  --background: 105 54% 10%;  /* Darker green background */
-  --foreground: 0 0% 98%;
-
-  --card: 105 54% 13%;  /* Dark green card */
-  --card-foreground: 0 0% 98%;
-
-  --popover: 105 54% 13%;
-  --popover-foreground: 0 0% 98%;
-
-  --primary: 105 54% 40%;  /* Slightly darkened primary */
-  --primary-foreground: 0 0% 98%;
-
-  --secondary: 105 54% 20%;  /* Darker secondary */
-  --secondary-foreground: 0 0% 98%;
-
-  --muted: 105 54% 18%;  /* Darker muted */
-  --muted-foreground: 0 0% 80%;
-
-  --accent: 51 80% 59%;
-  --accent-foreground: 0 0% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-
-  --border: 105 54% 25%;  /* Darker border */
-  --input: 105 54% 15%;   /* Darker input */
-  --ring: 105 54% 40%;    /* Darker ring */
+  /* ... keep existing code (dark mode variables) */
 }
 
 @layer base {
@@ -94,6 +40,21 @@
     @apply relative overflow-hidden rounded-xl transition-all duration-300
            bg-white shadow-md hover:shadow-xl hover:translate-y-[-5px] dark:bg-dark-green/90 dark:shadow-dark-green/30;
   }
+  
+  /* Enhanced product card with animation */
+  .product-card-active {
+    @apply shadow-glow;
+  }
+  
+  .product-card::before {
+    @apply content-[''] absolute inset-0 bg-gradient-nature opacity-0 transition-opacity duration-300;
+    z-index: -1;
+  }
+  
+  .product-card:hover::before {
+    @apply opacity-10;
+  }
+  
   .leaf-icon-container {
     @apply absolute z-10 opacity-0 transition-all duration-300 animate-leaf-fall;
   }
@@ -128,7 +89,7 @@
     @apply transition-all duration-500 hover:scale-[1.02];
   }
   
-  /* New creative elements */
+  /* Enhanced creative elements */
   .neo-blur {
     @apply backdrop-blur-2xl bg-dark-green/40 border border-white/10 dark:bg-dark-green/60;
   }
@@ -141,6 +102,7 @@
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23264F18' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
+  /* Enhanced animations */
   .floating-element {
     @apply animate-float transition-all duration-300;
     animation-duration: 3s;
@@ -187,6 +149,12 @@
     );
   }
   
+  /* New morphing animations */
+  .morphing-blob {
+    @apply bg-gradient-forest absolute opacity-70 animate-morphing;
+    filter: blur(30px);
+  }
+  
   /* Improved preloader */
   #preloader {
     @apply fixed inset-0 z-50 flex items-center justify-center bg-dark-green
@@ -197,10 +165,21 @@
     opacity: 0;
   }
   
+  #preloader.hidden {
+    display: none !important;
+  }
+  
   .preloader-background {
     @apply absolute inset-0 bg-gradient-to-br from-dark-green via-forest-dark to-dark-green;
     background-size: 200% 200%;
     animation: gradientShift 5s ease infinite;
+  }
+
+  /* Floating leaves */
+  .floating-leaf {
+    @apply absolute top-0 opacity-0 animate-leaf-fall;
+    transform: rotate(0deg);
+    z-index: 2;
   }
   
   @keyframes gradientShift {
@@ -227,7 +206,7 @@
            transition-all duration-700 ease-out;
   }
   
-  /* Notification styles */
+  /* Enhanced notification styles */
   .notification {
     @apply fixed bottom-6 right-6 z-40 max-w-md transform translate-y-20 opacity-0
            transition-all duration-300 ease-out;
@@ -243,12 +222,40 @@
   }
   
   .notification-icon {
-    @apply text-xl;
+    @apply text-xl animate-bounce-subtle;
   }
   
   .notification-close {
     @apply ml-auto text-gray-400 hover:text-gray-600 dark:hover:text-gray-300
            transition-colors text-xl leading-none;
+  }
+  
+  /* Enhanced cursor effects */
+  .custom-cursor {
+    @apply fixed w-8 h-8 rounded-full pointer-events-none z-[9999]
+           border-2 border-ryb-green/50 mix-blend-difference;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+  
+  /* Link hover effects */
+  .hover-underline {
+    @apply relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5
+           after:bg-ryb-green after:origin-bottom-right after:scale-x-0
+           after:transition-transform after:duration-300
+           hover:after:origin-bottom-left hover:after:scale-x-100;
+  }
+  
+  /* Enhanced decorative elements */
+  .deco-leaf {
+    @apply absolute opacity-20 z-[-1];
+  }
+  
+  /* Decorative spinning element */
+  .spin-element {
+    @apply absolute opacity-30 animate-spin-slow;
+    border: 2px dashed;
+    @apply border-ryb-green/30;
   }
   
   /* "No Selling" UI elements */
