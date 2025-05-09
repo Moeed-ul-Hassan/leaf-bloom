@@ -1,73 +1,91 @@
-# Welcome to your Lovable project
 
-## Project info
+# LeafBloom Digital Marketplace
 
-**URL**: https://lovable.dev/projects/50672373-c578-41a6-aec1-e3bc3ea7475c
+![LeafBloom Banner](images/placeholder.svg)
 
-## How can I edit this code?
+## Premium Digital Marketplace for Creators and Enthusiasts
 
-There are several ways of editing your application.
+LeafBloom is a stunning digital marketplace for premium digital products including eBooks, online courses, software, digital art, music, and templates. Built with pure HTML, CSS, and JavaScript, this marketplace features a luxurious design with dark mode support and beautiful animations.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/50672373-c578-41a6-aec1-e3bc3ea7475c) and start prompting.
+- **Modern & Responsive Design**: Fully responsive design that works beautifully across all devices
+- **Dark Mode**: Built-in dark mode with local storage persistence
+- **Animated Preloader**: Smooth entrance with a professional preloader
+- **Premium UI Components**: Glass morphism effects, subtle animations, and more
+- **Interactive Elements**: Product cards, category browsing, testimonial carousel
+- **Newsletter Subscription**: Integrated newsletter signup form
+- **Creator Spotlight**: Featured creator section to showcase talented digital creators
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technologies Used
 
-**Use your preferred IDE**
+- **HTML5**: Semantic markup structure
+- **CSS3**: Modern styling with CSS variables, flexbox, and grid
+- **JavaScript**: Vanilla JS for interactive elements
+- **Responsive Design**: Mobile-first approach with media queries
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Pages
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Home Page**: Stunning hero section, product grid, categories, testimonials, and more
+- **Product Pages**: (placeholder for future development)
+- **Category Pages**: (placeholder for future development)
+- **Creator Pages**: (placeholder for future development)
 
-Follow these steps:
+## Getting Started
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/leaf-bloom-market.git
 ```
 
-**Edit a file directly in GitHub**
+2. Navigate to the project directory:
+```bash
+cd leaf-bloom-market
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. Open the website:
+   - For local development, use a local server like Live Server for VS Code
+   - Simply open `index.html` in your browser
 
-**Use GitHub Codespaces**
+## Customization
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Colors
+The color scheme is based on TaskRabbit's brand colors:
+- RYB Green (#50AF33) - Primary color
+- Cal Poly Pomona Green (#264F18) - Secondary color
+- Additional accent colors for visual hierarchy
 
-## What technologies are used for this project?
+You can modify the colors in `css/main.css` by changing the CSS variables in the `:root` section.
 
-This project is built with:
+### Content
+Update the product and category data in the respective JavaScript files:
+- `js/products.js`
+- `js/categories.js`
+- `js/testimonials.js`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Featured Creator
 
-## How can I deploy this project?
+This marketplace features the work of **Moeed ul Hassan**. Check out [his portfolio](moeed-ul-hassan.github.io/Moeed-Mirza-Official-).
 
-Simply open [Lovable](https://lovable.dev/projects/50672373-c578-41a6-aec1-e3bc3ea7475c) and click on Share -> Publish.
+## Browser Support
 
-## Can I connect a custom domain to my Lovable project?
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Opera (latest)
 
-Yes, you can!
+## License
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Credits
+
+- Design & Development: [Your Name]
+- Featured Creator: Moeed ul Hassan
+- Icons: [Feather Icons](https://feathericons.com/)
+- Placeholder Images: Generated SVG placeholders
+
+---
+
+© 2023 LeafBloom Digital Marketplace. All Rights Reserved.
