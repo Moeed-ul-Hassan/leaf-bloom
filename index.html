@@ -4,18 +4,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LeafBloom - Digital Marketplace</title>
-    <meta name="description" content="Premium Digital Products Marketplace" />
-    <meta name="author" content="Moeed ul Hassan" />
+    
+    <!-- SEO Meta Tags -->
+    <title>LeafBloom - Premium Digital Marketplace</title>
+    <meta name="description" content="Discover luxury digital creations at LeafBloom - the premium marketplace for digital products, courses, and templates crafted by world-renowned creators." />
+    <meta name="keywords" content="digital marketplace, premium products, digital templates, online courses, digital art" />
+    <meta name="author" content="LeafBloom Team" />
 
-    <meta property="og:title" content="LeafBloom - Digital Marketplace" />
-    <meta property="og:description" content="Premium Digital Products Marketplace" />
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="LeafBloom - Premium Digital Marketplace" />
+    <meta property="og:description" content="Discover luxury digital creations at LeafBloom - the premium marketplace for digital products, courses, and templates." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:url" content="https://leafbloom.com" />
+    <meta property="og:site_name" content="LeafBloom" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@leaf_bloom" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,438 +34,35 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
     
-    <!-- Preloader -->
-    <style>
-      .preloader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #0e2110;
-        transition: opacity 0.5s ease;
-        opacity: 1;
-      }
-      
-      .preloader__content {
-        text-align: center;
-      }
-      
-      .preloader__logo {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 1rem;
-        animation: pulse 2s infinite;
-      }
-      
-      .preloader__logo path {
-        fill: #50AF33;
-      }
-      
-      .preloader__text {
-        color: #fff;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
-        margin-top: 1rem;
-      }
-      
-      .preloader__progress {
-        width: 200px;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.2);
-        margin: 1rem auto;
-        border-radius: 4px;
-        overflow: hidden;
-      }
-      
-      .preloader__progress-bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(to right, #50AF33, #264F18);
-        transition: width 0.5s ease;
-        border-radius: 4px;
-      }
-      
-      @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-      }
-      
-      .hidden {
-        opacity: 0 !important;
-        pointer-events: none;
-      }
-      
-      /* Add fade-in class for content animation */
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-      }
-    </style>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/placeholder.svg" as="image" />
   </head>
   <body class="dark">
-    <!-- Preloader -->
-    <div class="preloader" id="preloader">
-      <div class="preloader__content">
-        <div class="preloader__logo">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 6C9.79 6 8 7.79 8 10C8 10.55 8.45 11 9 11C9.55 11 10 10.55 10 10C10 8.9 10.9 8 12 8C13.1 8 14 8.9 14 10C14 10.55 14.45 11 15 11C15.55 11 16 10.55 16 10C16 7.79 14.21 6 12 6ZM7 14C7 16.21 9.21 18 12 18C14.79 18 17 16.21 17 14C17 13.45 16.55 13 16 13C15.45 13 15 13.45 15 14C15 15.1 13.66 16 12 16C10.34 16 9 15.1 9 14C9 13.45 8.55 13 8 13C7.45 13 7 13.45 7 14Z"/>
-          </svg>
-        </div>
-        <div class="preloader__progress">
-          <div class="preloader__progress-bar" id="preloaderBar"></div>
-        </div>
-        <div class="preloader__text">LeafBloom</div>
-      </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="min-h-screen bg-background">
-      <!-- Navigation -->
-      <header class="navbar">
-        <div class="container">
-          <div class="navbar__content">
-            <a href="/" class="navbar__logo">
-              <div class="navbar__logo-icon">LB</div>
-              <span class="navbar__logo-text">LeafBloom</span>
-            </a>
-            <nav class="navbar__links">
-              <a href="#" class="navbar__link">Home</a>
-              <a href="#" class="navbar__link">Products</a>
-              <a href="#" class="navbar__link">Categories</a>
-              <a href="#" class="navbar__link">Creators</a>
-              <a href="#" class="navbar__link">About</a>
-            </nav>
-            <div class="navbar__actions">
-              <button class="navbar__search">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-              </button>
-              <button class="navbar__cart">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="9" cy="21" r="1"></circle>
-                  <circle cx="20" cy="21" r="1"></circle>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                </svg>
-                <span class="navbar__cart-count">0</span>
-              </button>
-              <a href="#" class="button button--outline">Sign In</a>
-            </div>
-            <button class="navbar__menu-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </header>
-      
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="hero__background">
-          <!-- Decorative background elements -->
-          <div class="hero__decoration"></div>
-          <div class="hero__decoration"></div>
-          <div class="hero__decoration"></div>
-          <div class="hero__decoration"></div>
-          <div class="hero__decoration"></div>
-        </div>
-        
-        <div class="container">
-          <div class="hero__content">
-            <div class="hero__left">
-              <div class="hero__badge">Premium Digital Experience</div>
-              <h1 class="hero__title">Discover <span class="hero__highlight">Luxury</span> Digital Creations</h1>
-              <p class="hero__description">Explore our exclusive collection of premium digital products crafted by world-renowned creators – from masterclass courses to bespoke templates.</p>
-              <div class="hero__buttons">
-                <a href="#" class="button button--primary">Browse Collection 
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button__icon">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </a>
-                <a href="#" class="button button--outline">For Creators</a>
-              </div>
-              <div class="hero__trust">
-                <p>Trusted by elite creators and discerning clients worldwide</p>
-                <div class="hero__avatars">
-                  <div class="hero__avatar"></div>
-                  <div class="hero__avatar"></div>
-                  <div class="hero__avatar"></div>
-                  <div class="hero__avatar"></div>
-                  <span>+ many more</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="hero__right">
-              <div class="hero__card glass-card">
-                <div class="hero__product-image">
-                  <img src="images/placeholder.svg" alt="Featured Product" />
-                </div>
-                <div class="hero__product-content">
-                  <div class="hero__product-header">
-                    <span class="hero__product-label">FEATURED COLLECTION</span>
-                    <span class="hero__product-tag">Exclusive</span>
-                  </div>
-                  <h3 class="hero__product-title">Creative Masterclass Suite</h3>
-                  <div class="hero__product-creator">
-                    <div class="hero__product-avatar"></div>
-                    <span>by Atelier Studios</span>
-                  </div>
-                  <div class="hero__product-footer">
-                    <span class="hero__product-price">$149.99</span>
-                    <a href="#" class="button button--sm">Preview</a>
-                  </div>
-                </div>
-              </div>
-              <div class="hero__card-decoration hero__card-decoration--1"></div>
-              <div class="hero__card-decoration hero__card-decoration--2"></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="hero__scroll">
-          <span>Discover More</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </div>
-      </section>
-      
-      <!-- Products Grid -->
-      <section class="products">
-        <div class="container">
-          <h2 class="section-heading">Curated Digital Masterpieces</h2>
-          <div class="products__grid" id="productsGrid">
-            <!-- Products will be added here via JavaScript -->
-          </div>
-          <div class="products__more">
-            <a href="#" class="button button--outline">View All Products</a>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Categories Section -->
-      <section class="categories">
-        <div class="container">
-          <h2 class="section-heading">Browse By Category</h2>
-          <p class="section-description">Discover our extensive collection of premium digital products sorted by category, from educational resources to creative assets.</p>
-          
-          <div class="categories__grid">
-            <!-- Categories will be added here via JavaScript -->
-          </div>
-          
-          <div class="categories__more">
-            <a href="#" class="text-link">View All Categories</a>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Creator Spotlight -->
-      <section class="spotlight">
-        <div class="container">
-          <h2 class="section-heading">Creator Spotlight</h2>
-          <div class="spotlight__content">
-            <div class="spotlight__image">
-              <img src="images/placeholder.svg" alt="Creator Spotlight" />
-              <div class="spotlight__decoration"></div>
-            </div>
-            <div class="spotlight__info">
-              <div class="spotlight__badge">FEATURED CREATOR</div>
-              <h3 class="spotlight__name">Moeed ul Hassan</h3>
-              <p class="spotlight__bio">Digital innovator and creative mind behind some of our most popular premium resources, Moeed brings years of expertise in digital product creation.</p>
-              <div class="spotlight__stats">
-                <div class="spotlight__stat">
-                  <span class="spotlight__stat-number">47</span>
-                  <span class="spotlight__stat-label">Products</span>
-                </div>
-                <div class="spotlight__stat">
-                  <span class="spotlight__stat-number">12k+</span>
-                  <span class="spotlight__stat-label">Customers</span>
-                </div>
-                <div class="spotlight__stat">
-                  <span class="spotlight__stat-number">4.9</span>
-                  <span class="spotlight__stat-label">Rating</span>
-                </div>
-              </div>
-              <div class="spotlight__actions">
-                <a href="https://moeed-ul-hassan.github.io/Moeed-Mirza-Official/" class="button button--primary" target="_blank">View Portfolio</a>
-                <a href="#" class="button button--outline">View Products</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Testimonials -->
-      <section class="testimonials">
-        <div class="container">
-          <h2 class="section-heading">What Our Community Says</h2>
-          <div class="testimonials__slider" id="testimonialsSlider">
-            <!-- Testimonials will be added here via JavaScript -->
-          </div>
-          <div class="testimonials__controls">
-            <button class="testimonials__arrow testimonials__arrow--prev" id="testimonialPrev">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="testimonials__dots" id="testimonialDots"></div>
-            <button class="testimonials__arrow testimonials__arrow--next" id="testimonialNext">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Newsletter -->
-      <section class="newsletter">
-        <div class="container">
-          <div class="newsletter__content neo-blur">
-            <h2 class="newsletter__title">Join Our Community</h2>
-            <p class="newsletter__description">Subscribe to get exclusive updates, premium product announcements, and special offers.</p>
-            <form class="newsletter__form" id="newsletterForm">
-              <div class="newsletter__input-group">
-                <input type="email" class="newsletter__input" placeholder="Enter your email" required>
-                <button type="submit" class="button button--primary">Subscribe</button>
-              </div>
-              <div class="newsletter__privacy">
-                We respect your privacy. Unsubscribe at any time.
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="container">
-          <div class="footer__content">
-            <div class="footer__brand">
-              <a href="/" class="footer__logo">
-                <div class="footer__logo-icon">LB</div>
-                <span class="footer__logo-text">LeafBloom</span>
-              </a>
-              <p class="footer__description">A digital marketplace connecting creative minds with those seeking premium digital products and resources.</p>
-              <div class="footer__social">
-                <a href="#" class="footer__social-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                  </svg>
-                </a>
-                <a href="#" class="footer__social-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                </a>
-                <a href="#" class="footer__social-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                  </svg>
-                </a>
-                <a href="#" class="footer__social-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg>
-                </a>
-                <a href="#" class="footer__social-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                </a>
-              </div>
-              <div class="footer__secure">
-                <div class="footer__secure-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                </div>
-                <span class="footer__secure-text">
-                  <strong>Secure Payments</strong> via Stripe
-                </span>
-              </div>
-            </div>
-            
-            <div class="footer__links">
-              <div class="footer__column">
-                <h3 class="footer__heading">Products</h3>
-                <ul class="footer__list">
-                  <li><a href="#" class="footer__link">eBooks</a></li>
-                  <li><a href="#" class="footer__link">Courses</a></li>
-                  <li><a href="#" class="footer__link">Software</a></li>
-                  <li><a href="#" class="footer__link">Digital Art</a></li>
-                  <li><a href="#" class="footer__link">Music</a></li>
-                  <li><a href="#" class="footer__link">Templates</a></li>
-                </ul>
-              </div>
-              
-              <div class="footer__column">
-                <h3 class="footer__heading">Company</h3>
-                <ul class="footer__list">
-                  <li><a href="#" class="footer__link">About</a></li>
-                  <li><a href="#" class="footer__link">Careers</a></li>
-                  <li><a href="#" class="footer__link">Blog</a></li>
-                  <li><a href="#" class="footer__link">Press</a></li>
-                </ul>
-                
-                <h3 class="footer__heading footer__heading--mt">For Creators</h3>
-                <ul class="footer__list">
-                  <li><a href="#" class="footer__link">Sell on LeafBloom</a></li>
-                  <li><a href="#" class="footer__link">Creator Resources</a></li>
-                  <li><a href="#" class="footer__link">Success Stories</a></li>
-                  <li><a href="#" class="footer__link">Creator FAQs</a></li>
-                </ul>
-              </div>
-              
-              <div class="footer__column">
-                <h3 class="footer__heading">Support</h3>
-                <ul class="footer__list">
-                  <li><a href="#" class="footer__link">Help Center</a></li>
-                  <li><a href="#" class="footer__link">Contact Us</a></li>
-                  <li><a href="#" class="footer__link">Terms of Service</a></li>
-                  <li><a href="#" class="footer__link">Privacy Policy</a></li>
-                  <li><a href="#" class="footer__link">Cookie Policy</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div class="footer__bottom">
-            <p class="footer__copyright">&copy; <span id="currentYear"></span> LeafBloom. All rights reserved.</p>
-            <div class="footer__legal">
-              <a href="#" class="footer__legal-link">Terms</a>
-              <a href="#" class="footer__legal-link">Privacy</a>
-              <a href="#" class="footer__legal-link">Cookies</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    <!-- Accessibility: Skip to content link -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
     
-    <!-- Scripts -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script src="js/main.js"></script>
-    <script src="js/preloader.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/categories.js"></script>
-    <script src="js/testimonials.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "LeafBloom",
+        "url": "https://leafbloom.com",
+        "logo": "https://leafbloom.com/logo.png",
+        "description": "Premium digital marketplace for exclusive digital products and templates.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-234-567-8901",
+          "contactType": "customer service"
+        },
+        "sameAs": [
+          "https://twitter.com/leafbloom",
+          "https://instagram.com/leafbloom_marketplace"
+        ]
+      }
+    </script>
   </body>
 </html>

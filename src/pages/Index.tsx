@@ -38,15 +38,69 @@ const SpinElements = () => {
   return (
     <>
       <div className="spin-element w-24 h-24 rounded-full left-[10%] top-[30%]" />
-      <div className="spin-element w-36 h-36 rounded-full right-[5%] top-[60%]" style={{animationDirection: 'reverse'}} />
-      <div className="spin-element w-20 h-20 rounded-full left-[8%] bottom-[15%]" style={{animationDuration: '12s'}} />
+      <div className="spin-element w-36 h-36 rounded-full right-[5%] top-[60%]" 
+           style={{animationDirection: 'reverse' as const}} />
+      <div className="spin-element w-20 h-20 rounded-full left-[8%] bottom-[15%]" 
+           style={{animationDuration: '12s'}} />
     </>
   );
+};
+
+// SEO meta component for better search engine visibility
+const SEOMeta = () => {
+  useEffect(() => {
+    // Update document title for SEO
+    document.title = "LeafBloom - Premium Digital Marketplace";
+    
+    // Add meta description
+    const metaDescription = document.createElement('meta');
+    metaDescription.name = 'description';
+    metaDescription.content = 'Discover luxury digital creations at LeafBloom - the premium marketplace for digital products, courses, and templates crafted by world-renowned creators.';
+    document.head.appendChild(metaDescription);
+    
+    // Add canonical link
+    const canonicalLink = document.createElement('link');
+    canonicalLink.rel = 'canonical';
+    canonicalLink.href = window.location.href;
+    document.head.appendChild(canonicalLink);
+    
+    return () => {
+      // Cleanup function to remove added elements if component unmounts
+      document.head.removeChild(metaDescription);
+      document.head.removeChild(canonicalLink);
+    };
+  }, []);
+  
+  return null;
 };
 
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Fix preloader to make it disappear
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      const hidePreloader = () => {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.classList.add('hidden');
+        }, 700);
+      };
+
+      // Simulate loading progress
+      const progressBar = document.getElementById('preloaderBar');
+      let width = 0;
+      const interval = setInterval(() => {
+        if (width >= 100) {
+          clearInterval(interval);
+          hidePreloader();
+        } else {
+          width += 5;
+          if (progressBar) progressBar.style.width = width + '%';
+        }
+      }, 50);
+    }
 
     // Create custom cursor effect
     const createCustomCursor = () => {
@@ -109,14 +163,32 @@ const Index = () => {
       }
     };
 
+    // Add scroll animations to elements
+    const addScrollAnimations = () => {
+      const animateElements = document.querySelectorAll('.animate-on-scroll');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      animateElements.forEach(el => observer.observe(el));
+    };
+
     // Only run these effects on larger screens
     if (window.innerWidth > 768) {
       // Uncomment for custom cursor
       // createCustomCursor();
       createLeafDecorations();
+      setTimeout(addScrollAnimations, 500);
     }
     
-    // Add parallax scroll effect
+    // Add parallax scroll effect with improved performance using requestAnimationFrame
+    let ticking = false;
     const handleParallax = () => {
       const scrollY = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax');
@@ -124,19 +196,37 @@ const Index = () => {
       parallaxElements.forEach((el, index) => {
         const speed = 0.1 + (index * 0.05);
         const yPos = -(scrollY * speed);
-        el.style.transform = `translateY(${yPos}px)`;
+        (el as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
+      
+      ticking = false;
     };
     
-    window.addEventListener('scroll', handleParallax);
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(handleParallax);
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
+    
+    // Add favicon if missing
+    if (!document.querySelector("link[rel*='icon']")) {
+      const link = document.createElement('link');
+      link.rel = 'icon';
+      link.href = '/placeholder.svg'; // Using placeholder as favicon
+      document.head.appendChild(link);
+    }
     
     return () => {
-      window.removeEventListener('scroll', handleParallax);
+      window.removeEventListener('scroll', requestTick);
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
+      <SEOMeta />
       <MorphingBackground />
       <SpinElements />
       <Navbar />
@@ -147,6 +237,31 @@ const Index = () => {
       <TestimonialSection />
       <NewsletterSection />
       <Footer />
+      
+      {/* Add "No Selling" notification */}
+      <div className="fixed bottom-4 left-4 z-50 p-4 bg-destructive text-white rounded-lg shadow-lg animate-bounce-slow">
+        <div className="flex items-center gap-2">
+          <span className="font-medium">Marketplace Info:</span>
+          <span>This is a showcase platform only. Product selling is not enabled.</span>
+        </div>
+      </div>
+      
+      {/* Back to top button with smooth scroll */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-4 right-4 z-50 p-3 bg-ryb-green text-white rounded-full shadow-lg hover:bg-dark-green transition-colors opacity-0 translate-y-10 hover:scale-110"
+        id="backToTop"
+        aria-label="Scroll back to top"
+        style={{
+          opacity: 0,
+          transform: 'translateY(10px)',
+          transition: 'opacity 0.3s, transform 0.3s',
+        }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
     </div>
   );
 };
