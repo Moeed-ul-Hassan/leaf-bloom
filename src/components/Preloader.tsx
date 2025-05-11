@@ -6,22 +6,32 @@ const Preloader: React.FC = () => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    // Ensure we start quickly but gradually slow down for a more natural loading feel
+    const calculateNextIncrement = (current: number) => {
+      // Start fast, slow down as we approach 100%
+      return Math.max(1, Math.floor((100 - current) / 5));
+    };
+
     const interval = setInterval(() => {
       setProgress(prev => {
-        if (prev >= 100) {
+        const nextIncrement = calculateNextIncrement(prev);
+        const newValue = prev + nextIncrement;
+        
+        if (newValue >= 100) {
           clearInterval(interval);
           setTimeout(() => {
             setVisible(false);
-          }, 500);
+          }, 600); // Match with CSS transition time
           return 100;
         }
-        return prev + 5;
+        return newValue;
       });
-    }, 50);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Don't render anything if not visible
   if (!visible) return null;
 
   return (
@@ -29,43 +39,63 @@ const Preloader: React.FC = () => {
       id="preloader" 
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-dark-green
                   transition-opacity duration-700 ease-in-out ${progress >= 100 ? 'opacity-0' : 'opacity-100'}`}
+      aria-label="Loading application"
+      role="progressbar"
+      aria-valuenow={progress}
+      aria-valuemin={0}
+      aria-valuemax={100}
     >
       <div className="preloader-background absolute inset-0"></div>
       <div id="preloaderContent" className="relative z-10 text-center">
-        <div className="w-28 h-28 mx-auto mb-4 relative">
+        <div className="w-32 h-32 mx-auto mb-6 relative">
           <svg 
             className="animate-pulse w-full h-full" 
             viewBox="0 0 24 24" 
             fill="#50AF33"
+            aria-hidden="true"
           >
             <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
           </svg>
           
           {/* Animated particles around the logo */}
-          {[...Array(5)].map((_, i) => (
-            <div 
-              key={i}
-              className="absolute w-2 h-2 bg-ryb-green rounded-full animate-float opacity-70"
-              style={{
-                top: `${50 + Math.sin(i * 72 * Math.PI / 180) * 30}%`,
-                left: `${50 + Math.cos(i * 72 * Math.PI / 180) * 30}%`,
-                animationDelay: `${i * 0.3}s`,
-              }}
-            ></div>
-          ))}
+          <div className="absolute inset-0 flex items-center justify-center">
+            {[...Array(6)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute w-2 h-2 bg-ryb-green rounded-full opacity-70"
+                style={{
+                  top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 40}%`,
+                  left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 40}%`,
+                  animation: `float ${2 + i * 0.5}s ease-in-out infinite`,
+                  animationDelay: `${i * 0.2}s`,
+                }}
+                aria-hidden="true"
+              ></div>
+            ))}
+          </div>
         </div>
         
-        <div className="w-48 h-2 mx-auto bg-white/10 rounded-full overflow-hidden mb-4">
+        <div className="w-56 h-3 mx-auto bg-white/10 rounded-full overflow-hidden mb-6">
           <div 
             id="preloaderBar" 
             className="h-full bg-gradient-to-r from-ryb-green to-pale-gold rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
+            aria-hidden="true"
           ></div>
         </div>
         
-        <div className="text-white text-xl font-display font-bold tracking-widest">
-          LEAFBLOOM
+        <div className="text-white text-2xl font-display font-bold tracking-widest">
+          <span className="text-ryb-green">LEAF</span>
+          <span className="text-pale-gold">BLOOM</span>
         </div>
+        <div className="text-white/70 text-sm mt-2">
+          Loading experience... {progress}%
+        </div>
+      </div>
+      
+      {/* Additional decorative elements */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center text-white/50 text-xs">
+        <p>Experience nature-inspired digital products</p>
       </div>
     </div>
   );
