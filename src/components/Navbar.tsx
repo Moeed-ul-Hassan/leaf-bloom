@@ -48,12 +48,13 @@ export default function Navbar() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center">
-            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
+          <div className="h-10 w-auto">
+            <img 
+              src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
+              alt="LeafBloom Logo" 
+              className="h-full w-auto object-contain"
+            />
           </div>
-          <span className="text-xl font-display font-bold text-dark-green dark:text-white">LeafBloom</span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -124,7 +125,13 @@ export default function Navbar() {
             <SheetContent side="right" className="w-full p-0">
               <div className="flex flex-col h-full bg-gradient-to-br from-pale-gold/90 to-ryb-green p-6">
                 <div className="flex justify-between items-center mb-8">
-                  <span className="text-xl font-display font-bold text-dark-green">Menu</span>
+                  <div className="h-8 w-auto">
+                    <img 
+                      src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
+                      alt="LeafBloom Logo" 
+                      className="h-full w-auto object-contain"
+                    />
+                  </div>
                   <button onClick={() => setIsMobileMenuOpen(false)}>
                     <X className="w-5 h-5 text-dark-green" />
                   </button>

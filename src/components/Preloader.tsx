@@ -47,15 +47,12 @@ const Preloader: React.FC = () => {
     >
       <div className="preloader-background absolute inset-0"></div>
       <div id="preloaderContent" className="relative z-10 text-center">
-        <div className="w-32 h-32 mx-auto mb-6 relative">
-          <svg 
-            className="animate-pulse w-full h-full" 
-            viewBox="0 0 24 24" 
-            fill="#E8C547"
-            aria-hidden="true"
-          >
-            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
-          </svg>
+        <div className="w-32 h-32 mx-auto mb-6 relative flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
+            alt="LeafBloom Logo" 
+            className="w-full h-auto animate-pulse"
+          />
           
           {/* Animated particles around the logo */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -85,8 +82,7 @@ const Preloader: React.FC = () => {
         </div>
         
         <div className="text-white text-2xl font-display font-bold tracking-widest">
-          <span className="text-ryb-green">LEAF</span>
-          <span className="text-pale-gold">BLOOM</span>
+          <span className="text-pale-gold">LEAFBLOOM</span>
         </div>
         <div className="text-white/70 text-sm mt-2">
           Loading experience... {progress}%
