@@ -17,6 +17,19 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 // Add scroll-triggered animations
 document.addEventListener('DOMContentLoaded', () => {
+  // Skip to content functionality
+  const skipLink = document.querySelector('.skip-to-content');
+  if (skipLink) {
+    skipLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const mainContent = document.getElementById('main-content');
+      if (mainContent) {
+        mainContent.setAttribute('tabindex', '-1');
+        mainContent.focus();
+      }
+    });
+  }
+
   // Back to top button visibility logic
   const backToTop = document.getElementById('backToTop');
   

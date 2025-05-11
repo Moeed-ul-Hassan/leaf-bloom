@@ -36,6 +36,24 @@
     
     <!-- Preload critical assets -->
     <link rel="preload" href="/placeholder.svg" as="image" />
+
+    <style>
+      .skip-to-content {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        padding: 8px;
+        background-color: #50AF33;
+        color: white;
+        z-index: 9999;
+        transition: top 0.3s;
+      }
+      
+      .skip-to-content:focus {
+        top: 0;
+        outline: none;
+      }
+    </style>
   </head>
   <body class="dark">
     <!-- Accessibility: Skip to content link -->
