@@ -49,12 +49,12 @@ const Preloader: React.FC = () => {
     >
       <div className="preloader-background absolute inset-0"></div>
       <div id="preloaderContent" className="relative z-10 text-center">
-        <div className={`${isMobile ? 'w-40 h-40' : 'w-36 h-36'} mx-auto mb-6 relative flex items-center justify-center`}>
-          <div className="rounded-full overflow-hidden bg-white p-2 shadow-lg">
+        <div className={`${isMobile ? 'w-48 h-48' : 'w-44 h-44'} mx-auto mb-6 relative flex items-center justify-center`}>
+          <div className="rounded-full overflow-hidden bg-white p-3 shadow-lg w-full h-full flex items-center justify-center">
             <img 
               src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
               alt="LeafBloom Logo" 
-              className="w-full h-auto animate-pulse"
+              className="w-5/6 h-auto animate-pulse rounded-full"
             />
           </div>
           
@@ -65,8 +65,8 @@ const Preloader: React.FC = () => {
                 key={i}
                 className="absolute w-2 h-2 bg-pale-gold rounded-full opacity-70"
                 style={{
-                  top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 40}%`,
-                  left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 40}%`,
+                  top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 45}%`,
+                  left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 45}%`,
                   animation: `float ${2 + i * 0.5}s ease-in-out infinite`,
                   animationDelay: `${i * 0.2}s`,
                 }}
