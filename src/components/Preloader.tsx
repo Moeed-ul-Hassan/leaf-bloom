@@ -94,8 +94,9 @@ const Preloader: React.FC = () => {
       </div>
       
       {/* Additional decorative elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center text-white/50 text-xs">
-        <p>Experience nature-inspired digital products</p>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
+        <p className="text-white/50 text-xs mb-2">All products are made by our team</p>
+        <p className="text-white/50 text-xs">Experience nature-inspired digital products</p>
       </div>
     </div>
   );

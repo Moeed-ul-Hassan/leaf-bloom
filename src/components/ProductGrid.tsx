@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, ShoppingCart, Heart, Star, ShieldCheck, Info } from 'lucide-react';
@@ -39,7 +38,7 @@ const dummyProducts: Product[] = [
     price: 49.99,
     rating: 4.9,
     creator: {
-      name: 'Jane Smith',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isBestseller: true,
@@ -53,7 +52,7 @@ const dummyProducts: Product[] = [
     price: 12.99,
     rating: 4.7,
     creator: {
-      name: 'John Doe',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isNew: true
@@ -66,7 +65,7 @@ const dummyProducts: Product[] = [
     price: 29.99,
     rating: 4.5,
     creator: {
-      name: 'Artistic Studios',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isOfficial: true
@@ -79,7 +78,7 @@ const dummyProducts: Product[] = [
     price: 19.99,
     rating: 4.8,
     creator: {
-      name: 'ResumeExperts',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isBestseller: true,
@@ -93,7 +92,7 @@ const dummyProducts: Product[] = [
     price: 34.99,
     rating: 4.6,
     creator: {
-      name: 'Audio Dreams',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     }
   },
@@ -105,7 +104,7 @@ const dummyProducts: Product[] = [
     price: 24.99,
     rating: 4.9,
     creator: {
-      name: 'Startup Sage',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isNew: true,
@@ -119,7 +118,7 @@ const dummyProducts: Product[] = [
     price: 17.99,
     rating: 4.5,
     creator: {
-      name: 'Lens Masters',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     }
   },
@@ -131,7 +130,7 @@ const dummyProducts: Product[] = [
     price: 14.99,
     rating: 4.7,
     creator: {
-      name: 'Money Mentors',
+      name: 'LeafBloom Team',
       avatar: '/placeholder.svg',
     },
     isOfficial: true
@@ -181,8 +180,8 @@ export default function ProductGrid({ title = "Curated Digital Masterpieces", pr
   
   const handleSellingInfo = () => {
     toast({
-      title: "Curated Marketplace",
-      description: "We don't allow third-party selling. All products are created or verified by our team.",
+      title: "LeafBloom Original Products",
+      description: "All products are created exclusively by our LeafBloom team to ensure premium quality.",
       variant: "default",
     });
   };
@@ -239,9 +238,9 @@ export default function ProductGrid({ title = "Curated Digital Masterpieces", pr
             <span className="px-2 py-1 bg-ryb-green text-white text-xs font-bold rounded">BESTSELLER</span>
           )}
           {product.isOfficial && (
-            <div className="premium-badge flex items-center gap-1">
+            <div className="premium-badge flex items-center gap-1 px-2 py-1 bg-white/20 backdrop-blur-sm text-white text-xs rounded">
               <ShieldCheck className="w-3 h-3" />
-              <span>Official</span>
+              <span>LeafBloom Original</span>
             </div>
           )}
         </div>
@@ -322,7 +321,7 @@ export default function ProductGrid({ title = "Curated Digital Masterpieces", pr
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-ryb-green to-pale-gold mx-auto mt-4 rounded-full"></div>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-              Our team carefully selects and verifies every digital product to ensure premium quality.
+              All our products are created exclusively by the LeafBloom team to ensure premium quality.
             </p>
           </div>
         )}
@@ -342,7 +341,7 @@ export default function ProductGrid({ title = "Curated Digital Masterpieces", pr
           
           <div className="mt-8 inline-flex items-center gap-2 text-sm text-muted-foreground">
             <ShieldCheck className="w-4 h-4 text-ryb-green" />
-            All products are created or verified by our team. No third-party selling.
+            All products are created exclusively by our LeafBloom team. No third-party selling.
           </div>
         </div>
       </div>
