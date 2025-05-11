@@ -28,7 +28,7 @@ const Preloader: React.FC = () => {
         }
         return newValue;
       });
-    }, 100);
+    }, 80); // Speed up the loading a bit on mobile
 
     return () => clearInterval(interval);
   }, []);
@@ -49,7 +49,7 @@ const Preloader: React.FC = () => {
     >
       <div className="preloader-background absolute inset-0"></div>
       <div id="preloaderContent" className="relative z-10 text-center">
-        <div className={`${isMobile ? 'w-48 h-48' : 'w-44 h-44'} mx-auto mb-6 relative flex items-center justify-center`}>
+        <div className={`${isMobile ? 'w-56 h-56' : 'w-48 h-48'} mx-auto mb-6 relative flex items-center justify-center`}>
           <div className="rounded-full overflow-hidden bg-white p-3 shadow-lg w-full h-full flex items-center justify-center">
             <img 
               src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
@@ -85,7 +85,7 @@ const Preloader: React.FC = () => {
           ></div>
         </div>
         
-        <div className="text-white text-2xl font-display font-bold tracking-widest">
+        <div className="text-white text-xl sm:text-2xl font-display font-bold tracking-widest">
           <span className="text-pale-gold">LEAFBLOOM</span>
         </div>
         <div className="text-white/70 text-sm mt-2">

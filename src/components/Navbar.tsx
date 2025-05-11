@@ -39,20 +39,20 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 px-2 sm:py-4 sm:px-4",
         isScrolled 
           ? "bg-white/95 dark:bg-dark-green/95 backdrop-blur-md shadow-md" 
           : "bg-gradient-to-r from-pale-gold/90 to-ryb-green/90 backdrop-blur-md"
       )}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-2 sm:px-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="h-10 w-auto">
+          <div className="h-10 w-10 sm:h-10 sm:w-auto">
             <img 
               src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
               alt="LeafBloom Logo" 
-              className="h-full w-auto object-contain"
+              className="h-full w-full sm:w-auto object-contain rounded-full"
             />
           </div>
         </Link>
@@ -64,7 +64,7 @@ export default function Navbar() {
               <span>Categories</span>
               <ChevronDown className="w-4 h-4" />
             </button>
-            <div className="absolute top-full -left-4 mt-2 w-56 bg-white dark:bg-dark-green rounded-md shadow-lg overflow-hidden transform scale-95 opacity-0 pointer-events-none group-hover:scale-100 group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 origin-top-left">
+            <div className="absolute top-full -left-4 mt-2 w-56 bg-white dark:bg-dark-green rounded-md shadow-lg overflow-hidden transform scale-95 opacity-0 pointer-events-none group-hover:scale-100 group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200 origin-top-left z-50">
               <div className="py-2">
                 {categories.map((category) => (
                   <Link
@@ -90,14 +90,14 @@ export default function Navbar() {
         </nav>
         
         {/* Search, Cart, User */}
-        <div className="flex items-center space-x-2 md:space-x-4">
-          <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
+        <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4">
+          <button className="p-1.5 sm:p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
             <Search className="w-5 h-5" />
           </button>
           
           <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetTrigger asChild>
-              <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors relative">
+              <button className="p-1.5 sm:p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors relative">
                 <ShoppingCart className="w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-dark-green text-[10px] text-white font-bold rounded-full flex items-center justify-center">
                   3
@@ -118,25 +118,25 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
+              <button className="p-1.5 sm:p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
                 <Menu className="w-5 h-5" />
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full p-0">
-              <div className="flex flex-col h-full bg-gradient-to-br from-pale-gold/90 to-ryb-green p-6">
-                <div className="flex justify-between items-center mb-8">
-                  <div className="h-8 w-auto">
+              <div className="flex flex-col h-full bg-gradient-to-br from-pale-gold/90 to-ryb-green p-4 sm:p-6">
+                <div className="flex justify-between items-center mb-6 sm:mb-8">
+                  <div className="h-10 w-10 rounded-full overflow-hidden">
                     <img 
                       src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
                       alt="LeafBloom Logo" 
-                      className="h-full w-auto object-contain"
+                      className="h-full w-full object-contain bg-white rounded-full p-1"
                     />
                   </div>
                   <button onClick={() => setIsMobileMenuOpen(false)}>
                     <X className="w-5 h-5 text-dark-green" />
                   </button>
                 </div>
-                <nav className="flex flex-col space-y-6">
+                <nav className="flex flex-col space-y-4 sm:space-y-6">
                   <Link to="/category/all" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     All Categories
                   </Link>
