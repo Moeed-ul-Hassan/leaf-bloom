@@ -42,7 +42,7 @@ export default function Navbar() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
         isScrolled 
           ? "bg-white/95 dark:bg-dark-green/95 backdrop-blur-md shadow-md" 
-          : "bg-gradient-to-r from-dark-green/80 to-ryb-green/80 backdrop-blur-md"
+          : "bg-gradient-to-r from-pale-gold/90 to-ryb-green/90 backdrop-blur-md"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
@@ -53,13 +53,13 @@ export default function Navbar() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
           </div>
-          <span className="text-xl font-display font-bold text-white dark:text-white">LeafBloom</span>
+          <span className="text-xl font-display font-bold text-dark-green dark:text-white">LeafBloom</span>
         </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           <div className="relative group">
-            <button className="flex items-center space-x-1 text-white hover:text-pale-gold transition-colors">
+            <button className="flex items-center space-x-1 text-dark-green hover:text-pale-gold transition-colors">
               <span>Categories</span>
               <ChevronDown className="w-4 h-4" />
             </button>
@@ -77,28 +77,28 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <Link to="/bestsellers" className="text-white hover:text-pale-gold transition-colors">
+          <Link to="/bestsellers" className="text-dark-green hover:text-pale-gold transition-colors">
             Bestsellers
           </Link>
-          <Link to="/new" className="text-white hover:text-pale-gold transition-colors">
+          <Link to="/new" className="text-dark-green hover:text-pale-gold transition-colors">
             New Releases
           </Link>
-          <Link to="/creators" className="text-white hover:text-pale-gold transition-colors">
+          <Link to="/creators" className="text-dark-green hover:text-pale-gold transition-colors">
             Creators
           </Link>
         </nav>
         
         {/* Search, Cart, User */}
         <div className="flex items-center space-x-2 md:space-x-4">
-          <button className="p-2 text-white hover:text-pale-gold rounded-full hover:bg-white/10 transition-colors">
+          <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
             <Search className="w-5 h-5" />
           </button>
           
           <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetTrigger asChild>
-              <button className="p-2 text-white hover:text-pale-gold rounded-full hover:bg-white/10 transition-colors relative">
+              <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors relative">
                 <ShoppingCart className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-pale-gold text-[10px] text-dark-green font-bold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-dark-green text-[10px] text-white font-bold rounded-full flex items-center justify-center">
                   3
                 </span>
               </button>
@@ -109,7 +109,7 @@ export default function Navbar() {
           </Sheet>
           
           <Link to="/account" className="md:flex items-center space-x-1 hidden">
-            <div className="p-2 text-white hover:text-pale-gold rounded-full hover:bg-white/10 transition-colors">
+            <div className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
               <User className="w-5 h-5" />
             </div>
           </Link>
@@ -117,48 +117,48 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <button className="p-2 text-white hover:text-pale-gold rounded-full hover:bg-white/10 transition-colors">
+              <button className="p-2 text-dark-green hover:text-pale-gold rounded-full hover:bg-dark-green/10 transition-colors">
                 <Menu className="w-5 h-5" />
               </button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full p-0">
-              <div className="flex flex-col h-full bg-gradient-to-br from-dark-green to-ryb-green p-6">
+              <div className="flex flex-col h-full bg-gradient-to-br from-pale-gold/90 to-ryb-green p-6">
                 <div className="flex justify-between items-center mb-8">
-                  <span className="text-xl font-display font-bold text-white">Menu</span>
+                  <span className="text-xl font-display font-bold text-dark-green">Menu</span>
                   <button onClick={() => setIsMobileMenuOpen(false)}>
-                    <X className="w-5 h-5 text-white" />
+                    <X className="w-5 h-5 text-dark-green" />
                   </button>
                 </div>
                 <nav className="flex flex-col space-y-6">
-                  <Link to="/category/all" className="text-lg text-white" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/category/all" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     All Categories
                   </Link>
                   {categories.map((category) => (
                     <Link 
                       key={category.name} 
                       to={category.href} 
-                      className="pl-4 border-l-2 border-pale-gold/50 text-white/90 hover:text-pale-gold hover:border-pale-gold transition-colors"
+                      className="pl-4 border-l-2 border-dark-green/50 text-dark-green/90 hover:text-dark-green hover:border-dark-green transition-colors"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {category.name}
                     </Link>
                   ))}
-                  <Link to="/bestsellers" className="text-lg text-white" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/bestsellers" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     Bestsellers
                   </Link>
-                  <Link to="/new" className="text-lg text-white" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/new" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     New Releases
                   </Link>
-                  <Link to="/creators" className="text-lg text-white" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/creators" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     Creators
                   </Link>
-                  <Link to="/account" className="text-lg text-white" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Link to="/account" className="text-lg text-dark-green" onClick={() => setIsMobileMenuOpen(false)}>
                     My Account
                   </Link>
                 </nav>
                 <div className="mt-auto">
                   <Button 
-                    className="w-full bg-pale-gold text-dark-green hover:bg-white hover:text-dark-green"
+                    className="w-full bg-dark-green text-white hover:bg-dark-green/80"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Sign In

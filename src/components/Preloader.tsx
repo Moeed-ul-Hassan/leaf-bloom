@@ -37,7 +37,7 @@ const Preloader: React.FC = () => {
   return (
     <div 
       id="preloader" 
-      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-dark-green
+      className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-dark-green to-ryb-green
                   transition-opacity duration-700 ease-in-out ${progress >= 100 ? 'opacity-0' : 'opacity-100'}`}
       aria-label="Loading application"
       role="progressbar"
@@ -51,7 +51,7 @@ const Preloader: React.FC = () => {
           <svg 
             className="animate-pulse w-full h-full" 
             viewBox="0 0 24 24" 
-            fill="#50AF33"
+            fill="#E8C547"
             aria-hidden="true"
           >
             <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" />
@@ -62,7 +62,7 @@ const Preloader: React.FC = () => {
             {[...Array(6)].map((_, i) => (
               <div 
                 key={i}
-                className="absolute w-2 h-2 bg-ryb-green rounded-full opacity-70"
+                className="absolute w-2 h-2 bg-pale-gold rounded-full opacity-70"
                 style={{
                   top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 40}%`,
                   left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 40}%`,
@@ -94,9 +94,8 @@ const Preloader: React.FC = () => {
       </div>
       
       {/* Additional decorative elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center">
-        <p className="text-white/50 text-xs mb-2">All products are made by our team</p>
-        <p className="text-white/50 text-xs">Experience nature-inspired digital products</p>
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center text-white/50 text-xs">
+        <p>Experience nature-inspired digital products</p>
       </div>
     </div>
   );
