@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Preloader: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Ensure we start quickly but gradually slow down for a more natural loading feel
@@ -47,12 +49,14 @@ const Preloader: React.FC = () => {
     >
       <div className="preloader-background absolute inset-0"></div>
       <div id="preloaderContent" className="relative z-10 text-center">
-        <div className="w-32 h-32 mx-auto mb-6 relative flex items-center justify-center">
-          <img 
-            src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
-            alt="LeafBloom Logo" 
-            className="w-full h-auto animate-pulse"
-          />
+        <div className={`${isMobile ? 'w-40 h-40' : 'w-36 h-36'} mx-auto mb-6 relative flex items-center justify-center`}>
+          <div className="rounded-full overflow-hidden bg-white p-2 shadow-lg">
+            <img 
+              src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
+              alt="LeafBloom Logo" 
+              className="w-full h-auto animate-pulse"
+            />
+          </div>
           
           {/* Animated particles around the logo */}
           <div className="absolute inset-0 flex items-center justify-center">
