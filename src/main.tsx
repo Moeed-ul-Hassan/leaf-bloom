@@ -1,7 +1,6 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import App from './App.tsx'
 import Preloader from './components/Preloader.tsx'
 import { createScrollAnimations, setupBackToTop } from './utils/animation-utils.ts'
@@ -17,17 +16,13 @@ if (!rootElement) {
 
 const root = ReactDOM.createRoot(rootElement);
 
-// Get the base URL from the environment or default to '/'
-// For GitHub Pages, we need to include the repository name
-const basename = '/leaf-bloom';
-
 // Render application with Preloader first
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    <HashRouter>
       <Preloader />
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 )
 
