@@ -17,10 +17,14 @@ if (!rootElement) {
 
 const root = ReactDOM.createRoot(rootElement);
 
+// Get the base URL from the environment or default to '/'
+// For GitHub Pages, we need to include the repository name
+const basename = '/leaf-bloom';
+
 // Render application with Preloader first
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Preloader />
       <App />
     </BrowserRouter>
