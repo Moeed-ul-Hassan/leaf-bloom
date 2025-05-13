@@ -21,26 +21,30 @@ const Preloader: React.FC = () => {
         
         if (newValue >= 100) {
           clearInterval(interval);
+          // Shorter fade-out on mobile for better user experience
           setTimeout(() => {
             setVisible(false);
-          }, 600); // Match with CSS transition time
+          }, isMobile ? 400 : 600); // Match with CSS transition time
           return 100;
         }
         return newValue;
       });
-    }, 80); // Speed up the loading a bit on mobile
+    }, 70); // Faster loading for better mobile performance
 
-    return () => clearInterval(interval);
-  }, []);
+    // Clear preloader resources when unmounting
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isMobile]);
 
-  // Don't render anything if not visible
+  // Don't render anything if not visible to improve performance
   if (!visible) return null;
 
   return (
     <div 
       id="preloader" 
       className={`fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-dark-green to-ryb-green
-                  transition-opacity duration-700 ease-in-out ${progress >= 100 ? 'opacity-0' : 'opacity-100'}`}
+                  transition-opacity duration-500 ease-in-out ${progress >= 100 ? 'opacity-0' : 'opacity-100'}`}
       aria-label="Loading application"
       role="progressbar"
       aria-valuenow={progress}
@@ -48,25 +52,26 @@ const Preloader: React.FC = () => {
       aria-valuemax={100}
     >
       <div className="preloader-background absolute inset-0"></div>
-      <div id="preloaderContent" className="relative z-10 text-center">
-        <div className={`${isMobile ? 'w-56 h-56' : 'w-48 h-48'} mx-auto mb-6 relative flex items-center justify-center`}>
+      <div id="preloaderContent" className="relative z-10 text-center px-4">
+        <div className={`${isMobile ? 'w-64 h-64' : 'w-48 h-48'} mx-auto mb-4 relative flex items-center justify-center`}>
           <div className="rounded-full overflow-hidden bg-white p-3 shadow-lg w-full h-full flex items-center justify-center">
             <img 
               src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
               alt="LeafBloom Logo" 
               className="w-5/6 h-auto animate-pulse rounded-full"
+              loading="eager"
             />
           </div>
           
-          {/* Animated particles around the logo */}
+          {/* Reduced number of particles for better mobile performance */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(isMobile ? 4 : 6)].map((_, i) => (
               <div 
                 key={i}
                 className="absolute w-2 h-2 bg-pale-gold rounded-full opacity-70"
                 style={{
-                  top: `${50 + Math.sin(i * 60 * Math.PI / 180) * 45}%`,
-                  left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 45}%`,
+                  top: `${50 + Math.sin(i * (isMobile ? 90 : 60) * Math.PI / 180) * 45}%`,
+                  left: `${50 + Math.cos(i * (isMobile ? 90 : 60) * Math.PI / 180) * 45}%`,
                   animation: `float ${2 + i * 0.5}s ease-in-out infinite`,
                   animationDelay: `${i * 0.2}s`,
                 }}
@@ -76,7 +81,7 @@ const Preloader: React.FC = () => {
           </div>
         </div>
         
-        <div className="w-56 h-3 mx-auto bg-white/10 rounded-full overflow-hidden mb-6">
+        <div className="w-56 h-3 mx-auto bg-white/10 rounded-full overflow-hidden mb-4">
           <div 
             id="preloaderBar" 
             className="h-full bg-gradient-to-r from-ryb-green to-pale-gold rounded-full transition-all duration-300"
@@ -93,8 +98,8 @@ const Preloader: React.FC = () => {
         </div>
       </div>
       
-      {/* Additional decorative elements */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center text-white/50 text-xs">
+      {/* Simplified decorative elements for mobile */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center text-white/50 text-xs max-w-[90%]">
         <p>Experience nature-inspired digital products</p>
       </div>
     </div>

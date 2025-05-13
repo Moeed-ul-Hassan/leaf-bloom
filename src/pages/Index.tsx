@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
@@ -9,31 +10,49 @@ import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
 
-// Creative morphing blobs background component
-const MorphingBackground = () => {
+// Creative morphing blobs background component with mobile optimization
+const MorphingBackground = ({ isMobile }: { isMobile: boolean }) => {
+  // Render fewer and simpler blobs on mobile for better performance
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div 
-        className="morphing-blob w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] -left-[100px] -top-[200px]"
-        style={{animationDelay: '0s'}}
-      />
-      <div 
-        className="morphing-blob w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] -right-[200px] sm:-right-[300px] -bottom-[200px] sm:-bottom-[400px]"
-        style={{animationDelay: '4s'}}
-      />
-      <div 
-        className="morphing-blob hidden sm:block w-[600px] h-[600px] left-[50%] top-[30%]"
-        style={{animationDelay: '8s'}}
-      />
-      <div 
-        className="morphing-blob hidden sm:block w-[400px] h-[400px] right-[20%] top-[10%]"
-        style={{animationDelay: '12s'}}
-      />
+      {!isMobile && (
+        <>
+          <div 
+            className="morphing-blob w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] -left-[100px] -top-[200px]"
+            style={{animationDelay: '0s'}}
+          />
+          <div 
+            className="morphing-blob w-[400px] sm:w-[800px] h-[400px] sm:h-[800px] -right-[200px] sm:-right-[300px] -bottom-[200px] sm:-bottom-[400px]"
+            style={{animationDelay: '4s'}}
+          />
+        </>
+      )}
+      {/* Only one simple blob on mobile */}
+      {isMobile ? (
+        <div 
+          className="morphing-blob w-[300px] h-[300px] -right-[150px] -bottom-[150px]"
+          style={{
+            animationDelay: '0s',
+            opacity: 0.3, // Less opacity on mobile for better performance
+          }}
+        />
+      ) : (
+        <>
+          <div 
+            className="morphing-blob hidden sm:block w-[600px] h-[600px] left-[50%] top-[30%]"
+            style={{animationDelay: '8s'}}
+          />
+          <div 
+            className="morphing-blob hidden sm:block w-[400px] h-[400px] right-[20%] top-[10%]"
+            style={{animationDelay: '12s'}}
+          />
+        </>
+      )}
     </div>
   );
 };
 
-// Decorative spinning elements
+// Decorative spinning elements - only shown on desktop
 const SpinElements = () => {
   return (
     <>
@@ -75,10 +94,13 @@ const SEOMeta = () => {
 };
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
+    // Scroll to top when component mounts
     window.scrollTo(0, 0);
 
-    // Create animated floating leaves randomly across the page
+    // Create animated floating leaves - fewer on mobile
     const createLeafDecorations = () => {
       const leafSVGs = [
         `<svg viewBox="0 0 24 24" width="24" height="24" fill="#50AF33" opacity="0.4"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z" /></svg>`,
@@ -89,20 +111,27 @@ const Index = () => {
       const existingLeaves = document.querySelectorAll('.deco-leaf');
       existingLeaves.forEach(leaf => leaf.remove());
 
-      // Only create leaves on larger screens
-      if (window.innerWidth <= 768) return;
+      // Create fewer leaves on mobile devices
+      const maxLeaves = isMobile ? 3 : 6;
+      
+      // Only create leaves on devices that can handle it
+      if (window.innerWidth <= 480) return; // Skip on very small screens
 
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < maxLeaves; i++) {
         const leaf = document.createElement('div');
         leaf.classList.add('deco-leaf');
         leaf.innerHTML = leafSVGs[Math.floor(Math.random() * leafSVGs.length)];
         
-        // Random position
-        leaf.style.left = `${10 + Math.random() * 80}%`;
+        // Random position - keep leaves more to the sides on mobile
+        const leftPos = isMobile 
+          ? `${(Math.random() > 0.5 ? 85 : 15) + (Math.random() * 10 - 5)}%`
+          : `${10 + Math.random() * 80}%`;
+        
+        leaf.style.left = leftPos;
         leaf.style.top = `${20 + Math.random() * 60}%`;
         
-        // Random animation
-        leaf.style.animationDuration = `${10 + Math.random() * 10}s`;
+        // Slower animation on mobile
+        leaf.style.animationDuration = `${(isMobile ? 15 : 10) + Math.random() * 10}s`;
         leaf.style.animationDelay = `${Math.random() * 5}s`;
         leaf.classList.add('animate-float');
         
@@ -110,10 +139,12 @@ const Index = () => {
       }
     };
 
-    // Add scroll animations to elements
+    // Add scroll animations with mobile optimization
     const addScrollAnimations = () => {
       const animateElements = document.querySelectorAll('.animate-on-scroll');
       
+      if (animateElements.length === 0) return;
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -121,18 +152,23 @@ const Index = () => {
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
+      }, { 
+        threshold: isMobile ? 0.05 : 0.1, // Lower threshold on mobile
+        rootMargin: isMobile ? '30px' : '0px'
+      });
       
       animateElements.forEach(el => observer.observe(el));
     };
 
-    // Optimized parallax effect for better mobile performance
+    // Optimized parallax effect that skips on mobile
     let ticking = false;
     const handleParallax = () => {
-      if (window.innerWidth <= 768) return; // Skip parallax on mobile
+      if (isMobile) return; // Skip parallax on mobile completely
       
       const scrollY = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax');
+      
+      if (parallaxElements.length === 0) return;
       
       parallaxElements.forEach((el, index) => {
         const speed = 0.1 + (index * 0.05);
@@ -152,33 +188,43 @@ const Index = () => {
     
     // Create optimized leaf decorations that won't impact mobile performance
     setTimeout(() => {
-      createLeafDecorations();
+      if (!isMobile || window.innerWidth > 480) {
+        createLeafDecorations();
+      }
       
       // Add resize handler to recreate leaves when window is resized
       const handleResize = () => {
-        createLeafDecorations();
+        if (!isMobile || window.innerWidth > 480) {
+          createLeafDecorations();
+        }
       };
       
       window.addEventListener('resize', handleResize, { passive: true });
-      window.addEventListener('scroll', requestTick, { passive: true });
       
-      // Only run these effects on larger screens
+      // Only add parallax on non-mobile devices
+      if (!isMobile) {
+        window.addEventListener('scroll', requestTick, { passive: true });
+      }
+      
+      // Only run these effects on larger screens or with a delay on medium screens
       if (window.innerWidth > 768) {
         setTimeout(addScrollAnimations, 500);
+      } else if (window.innerWidth > 480) {
+        setTimeout(addScrollAnimations, 1000);
       }
       
       return () => {
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('scroll', requestTick);
       };
-    }, 1000);
+    }, isMobile ? 1500 : 1000); // Longer delay on mobile for better initial loading
     
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <SEOMeta />
-      <MorphingBackground />
+      <MorphingBackground isMobile={isMobile} />
       <SpinElements />
       <Navbar />
       <Hero />
@@ -190,17 +236,17 @@ const Index = () => {
       <Footer />
       
       {/* Add "No Selling" notification - make it more mobile friendly */}
-      <div className="fixed bottom-4 left-4 z-50 p-3 sm:p-4 max-w-[calc(100vw-32px)] sm:max-w-xs bg-destructive text-white rounded-lg shadow-lg animate-bounce-slow text-xs sm:text-sm">
-        <div className="flex items-center gap-2">
+      <div className="fixed bottom-4 left-4 z-50 p-2.5 sm:p-4 max-w-[calc(100vw-32px)] sm:max-w-xs bg-destructive/90 text-white rounded-lg shadow-lg animate-bounce-slow text-xs sm:text-sm">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <span className="font-medium">Marketplace Info:</span>
           <span className="line-clamp-2">This is a showcase platform only.</span>
         </div>
       </div>
       
-      {/* Back to top button with smooth scroll */}
+      {/* Back to top button with smooth scroll - improved for mobile */}
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-4 right-4 z-50 p-2 sm:p-3 bg-ryb-green text-white rounded-full shadow-lg hover:bg-dark-green transition-colors opacity-0 translate-y-10 hover:scale-110"
+        className="fixed bottom-4 right-4 z-50 p-3 sm:p-3 bg-ryb-green text-white rounded-full shadow-lg hover:bg-dark-green transition-colors opacity-0 translate-y-10 hover:scale-110"
         id="backToTop"
         aria-label="Scroll back to top"
         style={{

@@ -6,7 +6,18 @@ import App from './App.tsx'
 import Preloader from './components/Preloader.tsx'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// Create root once
+const rootElement = document.getElementById('root');
+
+// Ensure root element exists
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+
+// Render application with Preloader first
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Preloader />
@@ -44,17 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    // Use passive event listener for better mobile scroll performance
     window.addEventListener('scroll', handleScroll, { passive: true });
     // Initial check in case page loads scrolled down
     handleScroll();
   }
   
-  // Add animation classes to elements when they enter viewport
+  // Add animation classes to elements when they enter viewport - optimized for mobile
   const animateOnScroll = () => {
     const elements = document.querySelectorAll('.fade-in');
     
-    // Only set up animations on devices that can handle it
     if ('IntersectionObserver' in window) {
+      // Use lower threshold on mobile for better performance
+      const isMobile = window.innerWidth < 768;
+      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -62,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
+      }, { 
+        threshold: isMobile ? 0.05 : 0.1,
+        rootMargin: isMobile ? '50px' : '0px'
+      });
       
       elements.forEach(el => observer.observe(el));
     } else {
@@ -71,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   
-  // Run animations after a slight delay to ensure DOM is ready
-  setTimeout(animateOnScroll, 200);
+  // Detect if we're on a mobile device to optimize animations
+  const isMobile = window.innerWidth < 768;
+  
+  // Delay animations slightly longer on mobile to ensure page is fully loaded
+  setTimeout(animateOnScroll, isMobile ? 400 : 200);
 });
