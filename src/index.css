@@ -9,11 +9,57 @@
   --font-inter: 'Inter', sans-serif;
   --font-playfair: 'Playfair Display', serif;
   
-  /* ... keep existing code (color variables) */
+  /* Colors */
+  --ryb-green: rgb(80, 175, 51);
+  --dark-green: rgb(38, 79, 24);
+  --forest-dark: rgb(26, 46, 15);
+  --forest-light: rgb(127, 203, 103);
+  --pale-gold: rgb(232, 197, 71);
+  --premium-gold: rgb(212, 175, 55);
+  
+  /* Color system */
+  --background: 0 0% 100%;
+  --foreground: 222.2 47.4% 11.2%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 47.4% 11.2%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 47.4% 11.2%;
+  --primary: 142 58% 42%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 135 46% 24%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 45 77% 59%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 142 58% 42%;
+  --radius: 0.75rem;
 }
 
 .dark {
-  /* ... keep existing code (dark mode variables) */
+  --background: 135 38% 13%;
+  --foreground: 213 31% 91%;
+  --card: 135 41% 18%;
+  --card-foreground: 213 31% 91%;
+  --popover: 135 41% 18%;
+  --popover-foreground: 213 31% 91%;
+  --primary: 142 50% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 135 32% 19%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 135 35% 20%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 45 77% 59%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 70% 30%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 135 27% 22%;
+  --input: 135 41% 18%;
+  --ring: 142 50% 40%;
 }
 
 @layer base {
@@ -289,6 +335,55 @@
            px-2 py-1 rounded-md shadow-md;
   }
   
+  /* Theme toggle button styles */
+  .theme-toggle {
+    @apply fixed z-50 bottom-4 left-4 w-10 h-10 rounded-full 
+           flex items-center justify-center transition-all duration-300 
+           bg-white dark:bg-dark-green shadow-lg
+           hover:scale-110 active:scale-95;
+  }
+  
+  .theme-toggle-icon {
+    @apply w-5 h-5 text-dark-green dark:text-white transition-transform duration-500;
+  }
+  
+  /* Animated section transitions */
+  .section-transition {
+    @apply opacity-0 transition-all duration-700 ease-in-out;
+    transform: translateY(30px);
+  }
+  
+  .section-transition.in-view {
+    @apply opacity-100;
+    transform: translateY(0);
+  }
+  
+  /* Button hover animations */
+  .btn-hover-slide {
+    @apply relative overflow-hidden z-10;
+  }
+  
+  .btn-hover-slide::before {
+    @apply absolute inset-0 bg-dark-green -z-10
+           transform -translate-x-full transition-transform duration-300 ease-out;
+    content: '';
+  }
+  
+  .btn-hover-slide:hover::before {
+    @apply transform translate-x-0;
+  }
+  
+  /* Enhanced card hover effects */
+  .card-hover-rise {
+    @apply transition-all duration-300 ease-out;
+    transform: translateY(0);
+  }
+  
+  .card-hover-rise:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
   /* New animations */
   @keyframes shimmer {
     0% { background-position: -100% 0; }
@@ -358,4 +453,10 @@
   .parallax {
     will-change: transform;
   }
+  
+  /* Theme transition effect */
+  .theme-transition {
+    @apply transition-colors duration-300 ease-in-out;
+  }
 }
+

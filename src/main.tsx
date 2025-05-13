@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import Preloader from './components/Preloader.tsx'
+import { createScrollAnimations, setupBackToTop } from './utils/animation-utils.ts'
 import './index.css'
 
 // Create root once
@@ -26,9 +27,9 @@ root.render(
   </React.StrictMode>,
 )
 
-// Add scroll-triggered animations with improved mobile support
+// Add enhanced animations and accessibility features
 document.addEventListener('DOMContentLoaded', () => {
-  // Skip to content functionality
+  // Skip to content accessibility
   const skipLink = document.querySelector('.skip-to-content');
   if (skipLink) {
     skipLink.addEventListener('click', (e) => {
@@ -41,56 +42,59 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Back to top button visibility logic with improved touch device support
-  const backToTop = document.getElementById('backToTop');
+  // Setup back to top button with improved mobile support
+  setupBackToTop('backToTop');
   
-  if (backToTop) {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
-        backToTop.style.opacity = '1';
-        backToTop.style.transform = 'translateY(0)';
-      } else {
-        backToTop.style.opacity = '0';
-        backToTop.style.transform = 'translateY(10px)';
-      }
-    };
-
-    // Use passive event listener for better mobile scroll performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check in case page loads scrolled down
-    handleScroll();
-  }
-  
-  // Add animation classes to elements when they enter viewport - optimized for mobile
-  const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.fade-in');
+  // Add scroll-triggered animations with improved mobile support
+  const animateElements = () => {
+    // Detect if we're on a mobile device to optimize animations
+    const isMobile = window.innerWidth < 768;
     
-    if ('IntersectionObserver' in window) {
-      // Use lower threshold on mobile for better performance
-      const isMobile = window.innerWidth < 768;
+    // Stagger animations for better performance, especially on mobile
+    setTimeout(() => {
+      createScrollAnimations('.fade-in', 'animate-fade-in', 
+        isMobile ? 0.05 : 0.1, 
+        isMobile ? '50px' : '0px',
+        isMobile
+      );
       
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { 
-        threshold: isMobile ? 0.05 : 0.1,
-        rootMargin: isMobile ? '50px' : '0px'
-      });
-      
-      elements.forEach(el => observer.observe(el));
-    } else {
-      // Fallback for older browsers - just show the elements
-      elements.forEach(el => el.classList.add('animate-fade-in'));
-    }
+      createScrollAnimations('.section-transition', 'in-view', 
+        isMobile ? 0.05 : 0.15, 
+        isMobile ? '50px' : '-100px',
+        isMobile
+      );
+    }, isMobile ? 600 : 300);
   };
   
-  // Detect if we're on a mobile device to optimize animations
-  const isMobile = window.innerWidth < 768;
+  // Initialize animations
+  animateElements();
   
-  // Delay animations slightly longer on mobile to ensure page is fully loaded
-  setTimeout(animateOnScroll, isMobile ? 400 : 200);
+  // Enhance hover effects for desktop only - better performance on mobile
+  if (window.matchMedia('(hover: hover)').matches) {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('product-card-active');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('product-card-active');
+      });
+    });
+  }
+  
+  // Handle resize events to refresh animations if needed
+  let resizeTimer: number;
+  window.addEventListener('resize', () => {
+    // Debounce resize events
+    clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      // Only re-run animations if significant size change (mobile/desktop switch)
+      const wasMobile = window.innerWidth < 768;
+      const isMobile = window.innerWidth < 768;
+      
+      if (wasMobile !== isMobile) {
+        animateElements();
+      }
+    }, 250);
+  }, { passive: true });
 });

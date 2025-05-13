@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import Navbar from "@/components/Navbar";
@@ -9,6 +10,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
 import Preloader from "@/components/Preloader";
+import ThemeToggle from "@/components/ThemeToggle";
 
 // Creative morphing blobs background component with mobile optimization
 const MorphingBackground = ({ isMobile }: { isMobile: boolean }) => {
@@ -235,8 +237,11 @@ const Index = () => {
       <NewsletterSection />
       <Footer />
       
+      {/* Theme toggle button */}
+      <ThemeToggle />
+      
       {/* Add "No Selling" notification - make it more mobile friendly */}
-      <div className="fixed bottom-4 left-4 z-50 p-2.5 sm:p-4 max-w-[calc(100vw-32px)] sm:max-w-xs bg-destructive/90 text-white rounded-lg shadow-lg animate-bounce-slow text-xs sm:text-sm">
+      <div className="fixed bottom-4 right-4 z-30 p-2.5 sm:p-4 max-w-[calc(100vw-32px)] sm:max-w-xs bg-destructive/90 text-white rounded-lg shadow-lg animate-bounce-slow text-xs sm:text-sm">
         <div className="flex items-center gap-1.5 sm:gap-2">
           <span className="font-medium">Marketplace Info:</span>
           <span className="line-clamp-2">This is a showcase platform only.</span>
@@ -246,14 +251,9 @@ const Index = () => {
       {/* Back to top button with smooth scroll - improved for mobile */}
       <button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-4 right-4 z-50 p-3 sm:p-3 bg-ryb-green text-white rounded-full shadow-lg hover:bg-dark-green transition-colors opacity-0 translate-y-10 hover:scale-110"
+        className="fixed bottom-20 right-4 z-30 p-3 sm:p-3 bg-ryb-green text-white rounded-full shadow-lg hover:bg-dark-green transition-colors opacity-0 translate-y-10 hover:scale-110"
         id="backToTop"
         aria-label="Scroll back to top"
-        style={{
-          opacity: 0,
-          transform: 'translateY(10px)',
-          transition: 'opacity 0.3s, transform 0.3s',
-        }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="18 15 12 9 6 15"></polyline>
