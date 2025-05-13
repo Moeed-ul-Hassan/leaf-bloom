@@ -50,7 +50,7 @@ export default function Navbar() {
         <Link to="/" className="flex items-center space-x-2">
           <div className="h-10 w-10 sm:h-10 sm:w-auto">
             <img 
-              src="/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
+              src="public/lovable-uploads/13dd9c89-afdb-499f-9d0d-6a453c1336cf.png" 
               alt="LeafBloom Logo" 
               className="h-full w-full sm:w-auto object-contain rounded-full"
             />
